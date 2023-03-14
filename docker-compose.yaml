@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+
+  nestjs-rest-template:
+    container_name: nestjs-rest-template    
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      network: host
+    env_file:
+      - ./.env
+    network_mode: host
