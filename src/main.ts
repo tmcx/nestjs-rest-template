@@ -7,6 +7,8 @@ async function bootstrap() {
 
   SwaggerMiddleware(app);
 
-  await app.listen(3000);
+  const port = process.env.SERVICE_PORT || 3000;
+  await app.listen(port);
 }
+
 bootstrap();
