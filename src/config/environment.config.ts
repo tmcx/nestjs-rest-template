@@ -7,7 +7,7 @@ export class EnvironmentConfig {
     get(key: string): string {
         const value = process.env[key];
         if (value == undefined) {
-            this.logger.warn(`The requested environment variable ${value} is not defined.`);
+            this.logger.warn(`The requested environment variable '${key}' is not defined.`);
         }
         return value;
     }
