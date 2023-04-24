@@ -1,4 +1,4 @@
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerMiddleware } from './common/middlewares/swagger.middleware';
@@ -7,6 +7,14 @@ import { EnvironmentConfig } from './config/environment.config';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.useGlobalPipes(
+    new ValidationPipe({
+      skipMissingProperties: false,
+      forbidNonWhitelisted: true,
+      transform: true,
+      whitelist: true
+    })
+  );
   SwaggerMiddleware(app);
 
   const port = app.get(EnvironmentConfig).get('SERVICE_PORT') || 3000;
